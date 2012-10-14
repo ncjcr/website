@@ -8,3 +8,4 @@ parts/
 var/
 coverage/
 *.py[co]
+/buildout.d/passwords.cfg
