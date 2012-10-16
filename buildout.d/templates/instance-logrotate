@@ -1,0 +1,10 @@
+${buildout:directory}/var/instance*.log {
+  rotate 10
+  weekly
+  compress
+  delaycompress
+  postrotate
+    /sbin/kill -USR2 `cat ${buildout:directory}/var/instance1.pid`
+    /sbin/kill -USR2 `cat ${buildout:directory}/var/instance2.pid`
+  endscript
+}
