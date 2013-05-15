@@ -1,19 +1,15 @@
 Instalation
 ===========
 
-Development
------------
+#. Install Python 2.6 or Python 2.7 with headers.
+#. Make sure development packages of libxml2 and libxslt are installed.
+#. Install Python Imaging Library (PIL).
+#. python bootstrap.py -d -c buildout.cfg
+#. Depending on whether you want to develop or deploy run:
 
-#. Install Python 2.6 with headers, PIL.
-#. python2.6 bootstrap.py -d
-#. ./bin/buildout
+   * ./bin/buildout
 
-Deployment
-----------
-
-#. Install Python 2.6 with headers, PIL.
-#. python2.6 bootstrap.py -d
-#. ./bin/buildout -c deployment.cfg
+   * ./bin/buildout -c deployment.cfg
 
 Bugs and TODO
 =============
