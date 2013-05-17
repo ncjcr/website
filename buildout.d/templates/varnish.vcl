@@ -28,7 +28,7 @@ sub vcl_recv {
         if (!client.ip ~ purge) {
                 error 405 "Not allowed.";
         }
-        purge_url(req.url);
+        ban_url(req.url);
         error 200 "Purged";
     }
     if (req.request != "GET" && req.request != "HEAD") {
@@ -41,21 +41,21 @@ sub vcl_recv {
 }
 
 sub vcl_fetch {
-    if (!beresp.cacheable) {
+    if (beresp.ttl <= 0s) {
         set beresp.http.X-Varnish-Action = "FETCH (pass - not cacheable)";
-        return(pass);
+        return(hit_for_pass);
     }
     if (beresp.http.Set-Cookie) {
         set beresp.http.X-Varnish-Action = "FETCH (pass - response sets cookie)";
-        return(pass);
+        return(hit_for_pass);
     }
     if (!beresp.http.Cache-Control ~ "s-maxage=[1-9]" && beresp.http.Cache-Control ~ "(private|no-cache|no-store)") {
         set beresp.http.X-Varnish-Action = "FETCH (pass - response sets private/no-cache/no-store token)";
-        return(pass);
+        return(hit_for_pass);
     }
     if (!req.http.X-Anonymous && !beresp.http.Cache-Control ~ "public") {
         set beresp.http.X-Varnish-Action = "FETCH (pass - authorized and no public cache control)";
-        return(pass);
+        return(hit_for_pass);
     }
     if (req.http.X-Anonymous && !beresp.http.Cache-Control) {
         set beresp.ttl = 10s;
