@@ -23,6 +23,11 @@ acl purge {
 sub vcl_recv {
     set req.grace = 10m;
     set req.backend = balancer;
+
+    # Add ping url to test Varnish status.
+    if (req.request == "GET" && req.url ~ "/${urls:varnish-monitor}") {
+        error 200 "OK";
+    }
     
     if (req.request == "PURGE") {
         if (!client.ip ~ purge) {
