@@ -9,7 +9,10 @@
 .installed.cfg
 .mr.developer.cfg
 
-# Runtime configuration and ZODB files
+# virtualenv
+/venv/
+
+# Runtime configuration and data including ZODB files
 /var/
 
 # Coverage reports
