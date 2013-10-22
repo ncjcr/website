@@ -8,6 +8,7 @@
 # To change this to support multiple backends, see the vcl man pages
 # for instructions.
 
+import ipcast;
 
 # Configure balancer server as back end
 backend balancer {
@@ -20,12 +21,27 @@ acl purge {
     "${hosts:allow-purge}";
 }
 
+acl ping {
+    "localhost";
+}
+
 sub vcl_recv {
     set req.grace = 10m;
     set req.backend = balancer;
 
+    if (req.http.X-Forwarded-For !~ ",") {
+        set req.http.xff = req.http.X-Forwarded-For;
+    } else {
+        set req.http.xff = regsub(req.http.X-Forwarded-For,
+                "^[^,]+.?.?(.*)$", "\1");
+    }
+
+    if (ipcast.clientip(req.http.xff) != 0) {
+        error 400 "Bad request";
+    }
+
     # Add ping url to test Varnish status.
-    if (req.request == "GET" && req.url ~ "/${urls:varnish-monitor}") {
+    if (client.ip ~ ping && req.request == "GET" && req.url ~ "/${urls:varnish-monitor}") {
         error 200 "OK";
     }
     
