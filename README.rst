@@ -7,6 +7,7 @@ This project is The Oxford University New College JCR website buildout.
 The website is based on Plone, well-known Python CMS. There is a great
 book: "Professional Plone 4 development" which you can read online at
 http://www.ebrary.com/landing/site/bodleian/index-bodleian.jsp?Docid=10496813
+and its source code is at https://github.com/optilude/optilux/tree/chapter-18.
 
 
 Bootstraping
