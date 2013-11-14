@@ -2,12 +2,15 @@
 New College JCR website
 =======================
 
-This project is The Oxford University New College JCR website buildout.
+This project is The Oxford University `New College JCR website
+<http://jcr.new.ox.ac.uk>` buildout.
 
-The website is based on Plone, well-known Python CMS. There is a great
-book: "Professional Plone 4 development" which you can read online at
-http://www.ebrary.com/landing/site/bodleian/index-bodleian.jsp?Docid=10496813
-and its source code is at https://github.com/optilude/optilux/tree/chapter-18.
+
+Infrastructure
+==============
+
+The website itself is based on `Plone <http://plone.org/>`,
+well-known `Python <http://python.org/>` CMS.
 
 
 Bootstraping
@@ -58,6 +61,14 @@ Bootstraping
                 ./venv/bin/pip install setuptools --upgrade
                 ./venv/bin/python bootstrap.py
 
+Deployment
+----------
+
+Run buildout::
+
+    ./bin/buildout -c deployment.cfg
+
+
 Development
 -----------
 
@@ -72,9 +83,9 @@ Development
 
        ./bin/instance fg
 
-Deployment
-----------
-
-Run buildout::
-
-    ./bin/buildout -c deployment.cfg
+.. note:: There is a great book called "Professional Plone 4 development"
+          which you can read online (given you have an SSO access) at
+          http://www.ebrary.com/landing/site/bodleian/index-bodleian.jsp?Docid=10496813.
+          The buildout for this website is based on supplementary
+          `source code <https://github.com/optilude/optilux/tree/chapter-18>`
+          from this book.
