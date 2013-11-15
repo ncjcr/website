@@ -8,6 +8,7 @@
 # To change this to support multiple backends, see the vcl man pages
 # for instructions.
 
+# https://github.com/lkarsten/libvmod-ipcast
 import ipcast;
 
 # Configure balancer server as back end
@@ -29,6 +30,8 @@ sub vcl_recv {
     set req.grace = 10m;
     set req.backend = balancer;
 
+    # Every proxy server will add it's own X-Forwarded-For header,
+    # so take the last one only
     if (req.http.X-Forwarded-For !~ ",") {
         set req.http.xff = req.http.X-Forwarded-For;
     } else {
@@ -37,7 +40,9 @@ sub vcl_recv {
     }
 
     if (ipcast.clientip(req.http.xff) != 0) {
-        error 400 "Bad request";
+        # Uncomment the following line to block all non-proxy clients.
+        # Otherwise client.ip is untouched.
+        #error 400 "Bad request";
     }
 
     # Add ping url to test Varnish status.
