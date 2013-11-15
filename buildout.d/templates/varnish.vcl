@@ -41,13 +41,16 @@ sub vcl_recv {
     }
 
     # Add ping url to test Varnish status.
-    if (client.ip ~ ping && req.request == "GET" && req.url ~ "/${urls:varnish-monitor}") {
+    if (req.request == "GET" && req.url ~ "/${urls:varnish-monitor}") {
+        if (!client.ip ~ ping) {
+            error 405 "Not allowed.";
+        }
         error 200 "OK";
     }
-    
+
     if (req.request == "PURGE") {
         if (!client.ip ~ purge) {
-                error 405 "Not allowed.";
+            error 405 "Not allowed.";
         }
         ban_url(req.url);
         error 200 "Purged";
