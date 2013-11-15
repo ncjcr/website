@@ -1,4 +1,4 @@
-${buildout:directory}/var/instance*.log {
+${buildout:directory}/var/log/instance*-Z2.log {
   rotate 10
   weekly
   compress
@@ -7,4 +7,5 @@ ${buildout:directory}/var/instance*.log {
     /sbin/kill -USR2 `cat ${buildout:directory}/var/instance1.pid`
     /sbin/kill -USR2 `cat ${buildout:directory}/var/instance2.pid`
   endscript
+  su ${users:zope-process}
 }
