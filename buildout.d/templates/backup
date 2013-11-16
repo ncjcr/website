@@ -1,0 +1,7 @@
+#!/bin/sh
+
+# Backup RelStorage
+${relbackup:output}
+
+# Backup BLOBs
+${buildout:bin-directory}/blobbackup
