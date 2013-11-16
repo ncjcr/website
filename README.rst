@@ -3,14 +3,14 @@ New College JCR website
 =======================
 
 This project is The Oxford University `New College JCR website
-<http://jcr.new.ox.ac.uk>` buildout.
+<http://jcr.new.ox.ac.uk>`_ buildout.
 
 
 Infrastructure
 ==============
 
-The website itself is based on `Plone <http://plone.org/>`,
-well-known `Python <http://python.org/>` CMS.
+The website itself is based on `Plone <http://plone.org/>`_,
+well-known `Python <http://python.org/>`_ CMS.
 
 
 Backups
@@ -108,5 +108,5 @@ Development
           which you can read online (given you have an SSO access) at
           http://www.ebrary.com/landing/site/bodleian/index-bodleian.jsp?Docid=10496813.
           The buildout for this website is based on supplementary
-          `source code <https://github.com/optilude/optilux/tree/chapter-18>`
+          `source code <https://github.com/optilude/optilux/tree/chapter-18>`_
           from this book.
