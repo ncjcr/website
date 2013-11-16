@@ -68,7 +68,7 @@ Bootstraping
 
 #. python bootstrap.py
 
-   ..note:: If you are using setuptool<0.7 wou will have to create
+   ..note:: If you are using setuptools<0.7 wou will have to create
             a virtualenviroment, upgrade setuptools and use venv's
             Python binary::
 
@@ -98,7 +98,7 @@ Development
 
        ./bin/buildout -c development.cfg
 
-#. Start Zope instance:
+#. Start Zope instance::
 
        ./bin/instance fg
 
