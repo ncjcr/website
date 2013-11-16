@@ -68,9 +68,9 @@ Bootstraping
 
 #. python bootstrap.py
 
-   ..note:: If you are using setuptools<0.7 wou will have to create
-            a virtualenviroment, upgrade setuptools and use venv's
-            Python binary::
+   .. note:: If you are using setuptools<0.7 wou will have to create
+             a virtualenviroment, upgrade setuptools and use venv's
+             Python binary::
 
                 virtualenv --no-site-packages -p python2.6 venv
                 ./venv/bin/pip install setuptools --upgrade
