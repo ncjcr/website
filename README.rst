@@ -68,14 +68,46 @@ well-known `Python <http://python.org/>`_ CMS. The infrastructure::
 Backups
 =======
 
-Deployment buildout installs crontab entries which backup
-RelStorage database and BLOBs regularly. Backups can be found
-in `var/backups`.
+Deployment buildout installs crontab entry which backups
+RelStorage database and BLOBs regularly. You can run the backup
+yourself by typing::
+
+    $ ./bin/backup
+
+Backups are stored in ``var/backups``.
+
+**Remember to backup** before doing any complicated task.
 
 .. note:: It is advisable to back up the buildout once per
           deployment anyway, including the cache of downloaded
           eggs and extended files, in case any downloaded files
           cannot be downloaded again in the future.
+
+
+BLOBs
+-----
+
+BLOBs are by default backed up incrementaly, so if you need a snapshot run::
+
+    $ ./bin/blobbackup-snapshot
+
+BLOBs can be restored by calling either::
+
+    $ ./bin/blobbackup-restore
+
+or::
+
+    $ ./bin/blobbackup-snapshotrestore
+
+Read more on the `collective.recipe.backup site
+<https://pypi.python.org/pypi/collective.recipe.backup>`_.
+
+
+RelStorage
+----------
+
+``./bin/relbackup`` script is a wrapper for ``mysqldump`` command,
+which additionally uses ``bzip2`` to compress the resulting SQL dump.
 
 
 Bootstraping
