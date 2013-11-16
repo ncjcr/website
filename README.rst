@@ -13,6 +13,19 @@ The website itself is based on `Plone <http://plone.org/>`,
 well-known `Python <http://python.org/>` CMS.
 
 
+Backups
+=======
+
+Deployment buildout installs crontab entries which backup
+RelStorage database and BLOBs regularly. Backups can be found
+in `var/backups`.
+
+.. note:: It is advisable to back up the buildout once per
+          deployment anyway, including the cache of downloaded
+          eggs and extended files, in case any downloaded files
+          cannot be downloaded again in the future.
+
+
 Bootstraping
 ============
 
