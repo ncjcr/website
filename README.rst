@@ -51,6 +51,8 @@ Bootstraping
 
 #. Install Python Imaging Library (PIL) (?)
 
+#. Install rsync (for collective.recipe.backup).
+
 #. python bootstrap.py
 
    ..note:: If you are using setuptool<0.7 wou will have to create
