@@ -105,8 +105,8 @@ Development
 #. Remember to rerun the buildout every time a change is made.
 
 .. note:: There is a great book called "Professional Plone 4 development"
-          which you can read online (given you have an SSO access) at
-          http://www.ebrary.com/landing/site/bodleian/index-bodleian.jsp?Docid=10496813.
+          which, given you have an SSO access, you can `read online
+          <http://www.ebrary.com/landing/site/bodleian/index-bodleian.jsp?Docid=10496813>`_.
           The buildout for this website is based on supplementary
           `source code <https://github.com/optilude/optilux/tree/chapter-18>`_
           from this book.
