@@ -64,9 +64,13 @@ Bootstraping
 Deployment
 ----------
 
-Run buildout::
+Run buildout (every time a change is made)::
 
     ./bin/buildout -c deployment.cfg
+
+and start the Supervisord::
+
+    ./bin/supervisord
 
 
 Development
@@ -82,6 +86,8 @@ Development
 #. Start Zope instance:
 
        ./bin/instance fg
+
+#. Remember to rerun the buildout every time a change is made.
 
 .. note:: There is a great book called "Professional Plone 4 development"
           which you can read online (given you have an SSO access) at
