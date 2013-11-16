@@ -89,11 +89,11 @@ Bootstraping
 
                 For SLES 11 it would be::
 
-                    zypper install python python-develop
+                    $ zypper install python python-develop
 
                 and for Debian (7)::
 
-                    aptitude install python2.6 python2.6-dev
+                    $ apt-get install python2.6 python2.6-dev
 
 #. Make sure development packages of
 
@@ -124,20 +124,20 @@ Bootstraping
              a `virtualenv <https://pypi.python.org/pypi/virtualenv>`_
              instance, upgrade setuptools and use venv's Python binary::
 
-                virtualenv --no-site-packages -p python2.6 venv
-                ./venv/bin/pip install setuptools --upgrade
-                ./venv/bin/python bootstrap.py
+                 $ virtualenv --no-site-packages -p python2.6 venv
+                 $ ./venv/bin/pip install setuptools --upgrade
+                 $ ./venv/bin/python bootstrap.py
 
 Deployment
 ----------
 
 Run buildout (every time a change is made)::
 
-    ./bin/buildout -c deployment.cfg
+    $ ./bin/buildout -c deployment.cfg
 
 and start the Supervisord::
 
-    ./bin/supervisord
+    $ ./bin/supervisord
 
 
 Development
@@ -148,11 +148,11 @@ Development
 
 #. Run buildout::
 
-       ./bin/buildout -c development.cfg
+       $ ./bin/buildout -c development.cfg
 
 #. Start Zope instance::
 
-       ./bin/instance fg
+       $ ./bin/instance fg
 
 #. Remember to rerun the buildout every time a change is made.
 
