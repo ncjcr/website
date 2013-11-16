@@ -14,4 +14,4 @@ BACKUP_DIR='${buildout:directory}/backups/relstorage'
 NOW=$(date +"%F.%T")
 DEST="$BACKUP_DIR/$NOW.bz2"
 
-echo $MYSQLDUMP --user="$USER" --pasword="$PASSWORD" "$DATABASE" | $BZIP2 > $DEST
+$MYSQLDUMP --user="$USER" --pasword="$PASSWORD" "$DATABASE" | $BZIP2 > $DEST
