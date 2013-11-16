@@ -1,0 +1,17 @@
+#!/bin/sh
+
+# MySQL authentication
+USER='${users:relstorage}'
+PASSWORD='${passwords:relstorage}'
+DATABASE='${databases:relstorage}'
+
+# Binary path
+MYSQLDUMP='/usr/bin/mysqldump'
+BZIP2='/usr/bin/bzip2'
+
+# Backup location
+BACKUP_DIR='${buildout:directory}/backups/relstorage'
+NOW=$(date +"%F.%T")
+DEST="$BACKUP_DIR/$NOW.bz2"
+
+echo $MYSQLDUMP --user="$USER" --pasword="$PASSWORD" "$DATABASE" | $BZIP2 > $DEST
