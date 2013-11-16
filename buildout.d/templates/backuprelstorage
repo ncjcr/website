@@ -11,7 +11,7 @@ BZIP2='/usr/bin/bzip2'
 
 # Backup location
 BACKUP_DIR='${buildout:directory}/backups/relstorage'
-NOW=$(date +"%F.%T")
+NOW=$(date --utc +"%F.%T")
 DEST="$BACKUP_DIR/$NOW.sql.bz2"
 
 $MYSQLDUMP --user="$USER" --password="$PASSWORD" "$DATABASE" | $BZIP2 > $DEST
