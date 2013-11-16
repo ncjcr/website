@@ -8,10 +8,12 @@ DATABASE='${databases:relstorage}'
 # Binary path
 MYSQLDUMP='/usr/bin/mysqldump'
 BZIP2='/usr/bin/bzip2'
+MKDIR='/bin/mkdir'
 
 # Backup location
-BACKUP_DIR='${buildout:directory}/backups/relstorage'
+BACKUP_DIR='${location}'
 NOW=$(date --utc +"%F.%T")
 DEST="$BACKUP_DIR/$NOW.sql.bz2"
 
+$MKDIR -p $BACKUP_DIR
 $MYSQLDUMP --user="$USER" --password="$PASSWORD" "$DATABASE" | $BZIP2 > $DEST
