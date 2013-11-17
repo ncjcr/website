@@ -163,20 +163,37 @@ Bootstraping
 Deployment
 ----------
 
-Run buildout (every time a change is made)::
+#. Make sure ``buildout.d/secrets/jcr.new.ox.ac.uk.cfg`` exists
+   and contains appropriate usernames/passwords and other secrets.
 
-    $ ./bin/buildout -c deployment.cfg
+#. Run buildout::
 
-and start the Supervisord::
+     $ ./bin/buildout -c jcr.new.ox.ac.uk.cfg
 
-    $ ./bin/supervisord
+#. Start Supervisor::
+
+     $ ./bin/supervisord
+
+   and control it using the provided tool::
+
+     # ./bin/supervisordctl
+
+   Read more in the `Supervisor documentation <http://supervisord.org/>`_.
+
+#. Remember to rerun the buildout and restart appropriate processes
+   every time a change to the buildout config is made.
+
+
+Testing
+-------
+
+The instructions for testing are the same as for deployment,
+but update ``buildout.d/secrets/jcrtest.new.ox.ac.uk.cfg`` and
+run ``$ ./bin/buildout -c jcrtest.new.ox.ac.uk.cfg`` instead.
 
 
 Development
 -----------
-
-#. You should create development.cfg buildout config
-   which extends buildout.cfg but sets passwords appropriately.
 
 #. Run buildout::
 
