@@ -113,19 +113,19 @@ which additionally uses ``bzip2`` to compress the resulting SQL dump.
 Bootstraping
 ============
 
-#. Install Python 2.6 or Python 2.7 with headers.
+#. Install Python 2.6 with headers.
 
-   .. warning:: It is better to develop with the same Python version
-                as on the deployment server. At the time of writing
-                jcrweb server uses Python 2.6.
+   .. note:: It is advised to run and develop with the same Python
+             version as on the deployment server. At the time of
+             writing ``jcrweb`` server uses Python 2.6.
 
-                For SLES 11 it would be::
+   For SLES 11 it would be::
 
-                    $ zypper install python python-develop
+       $ zypper install python python-develop
 
-                and for Debian (7)::
+   and for Debian (7)::
 
-                    $ apt-get install python2.6 python2.6-dev
+       $ apt-get install python2.6 python2.6-dev
 
 #. Make sure development packages of
 
@@ -150,7 +150,7 @@ Bootstraping
 
 #. Install rsync (for collective.recipe.backup).
 
-#. python bootstrap.py
+#. ``$ python2.6 bootstrap.py``
 
    .. note:: If you are using ``setuptools<0.7`` you will have to create
              a `virtualenv <https://pypi.python.org/pypi/virtualenv>`_
