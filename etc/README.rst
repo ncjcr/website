@@ -1,1 +1,1 @@
-This direectory contains cofniguration files (``${buildout:etc-dir}``).
+This directory contains configuration files (``${buildout:etc-dir}``).
