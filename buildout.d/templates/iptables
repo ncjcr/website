@@ -1,0 +1,4 @@
+iptables -A OUTPUT -p tcp --dport ${ports.instance1} -o lo -m owner ! --uid-owner ${users.haproxy} -j REJECT
+iptables -A OUTPUT -p tcp --dport ${ports.instance2} -o lo -m owner ! --uid-owner ${users.haproxy} -j REJECT
+iptables -A OUTPUT -p tcp --dport ${ports.haproxy} -o lo -m owner ! --uid-owner ${users.varnish} -j REJECT
+iptables -A OUTPUT -p tcp --dport ${ports.varnish} -o lo -m owner ! --uid-owner ${users.httpd} -j REJECT
