@@ -1,19 +1,22 @@
 # Python bytecode
 *.py[co]
 
-# Buildout related
+# ${buildout:bin-directory}
 /bin/
-/eggs/
-/develop-eggs/
+# ${buildout:parts-directory}
 /parts/
+# ${buildout:installed}
 .installed.cfg
 .mr.developer.cfg
+# secrets directory
+/buildout.d/secrets/
 
 # virtualenv
 /venv/
 
-# Runtime configuration and data including ZODB files
+# Runtime configuration, logs, buildout cache, etc.
 /var/
+/etc/
 
 # Coverage reports
 /coverage/
