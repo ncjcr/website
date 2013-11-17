@@ -1,1 +1,1 @@
-Buildout extends cache (``${buildout:extends-cache}``).
+Buildout extends cache (``${buildout:extends-cache}``) directory.

@@ -1,1 +1,1 @@
-Buildout download cache (``${buildout:download-cache}``).
+Buildout download cache (``${buildout:download-cache}``) directory.
