@@ -14,8 +14,9 @@
 # virtualenv
 /venv/
 
-# Runtime configuration, logs, buildout cache, etc.
+# ${buildout:var-dir}
 /var/
+# ${buildout:etc-dir}
 /etc/
 
 # Coverage reports

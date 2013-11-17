@@ -1,1 +1,1 @@
-This direectory contains cofniguration files.
+This direectory contains cofniguration files (``${buildout:etc-dir}``).
