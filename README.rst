@@ -176,12 +176,17 @@ Deployment
 
    and control it using the provided tool::
 
-     # ./bin/supervisordctl
+     $ ./bin/supervisordctl
 
    Read more in the `Supervisor documentation <http://supervisord.org/>`_.
 
 #. Remember to rerun the buildout and restart appropriate processes
    every time a change to the buildout config is made.
+
+#. Reload Apache and firewall as necessary. For SLES::
+
+     $ rcapache2 reload
+     $ rcSuSEfirewall2 reload
 
 
 Testing

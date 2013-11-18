@@ -1,0 +1,38 @@
+#!/bin/sh
+
+# SLES setup
+# ----------
+#
+# In ``/etc/sysconfig/SuSEfirewall2`` file you should set::
+#
+#     FW_CUSTOMRULES="/etc/sysconfig/scripts/SuSEfirewall2-custom
+#
+# and in ``/etc/sysconfig/scripts/SuSEfirewall2-custom``::
+#
+#     fw_custom_before_denyall() {
+#         if [ -e ${iptables:output} ]; then
+#             . ${iptables:output}
+#         fi
+#         true
+#     }
+#
+# Then reload the firewall::
+#
+#    rcSuSEfirewall2 reload
+#
+
+
+# Apache -> Varnish, Supervisor, HAProxy stats
+iptables -I OUTPUT 1 -p tcp --dport ${ports:varnish} -o lo -m owner ! --uid-owner ${users:httpd} -j REJECT
+iptables -I OUTPUT 1 -p tcp --dport ${ports:supervisor} -o lo -m owner ! --uid-owner ${users:httpd} -j REJECT
+iptables -I OUTPUT 1 -p tcp --dport ${ports:haproxy-stats} -o lo -m owner ! --uid-owner ${users:httpd} -j REJECT
+
+# Varnish -> HAProxy
+iptables -I OUTPUT 1 -p tcp --dport ${ports:haproxy} -o lo -m owner ! --uid-owner ${users:varnish} -j REJECT
+
+# HAProxy -> Zope instances
+iptables -I OUTPUT 1 -p tcp --dport ${ports:instance1} -o lo -m owner ! --uid-owner ${users:haproxy} -j REJECT
+iptables -I OUTPUT 1 -p tcp --dport ${ports:instance2} -o lo -m owner ! --uid-owner ${users:haproxy} -j REJECT
+
+# Zope instances -> Memcached
+iptables -I OUTPUT 1 -p tcp --dport ${ports:memcached} -o lo -m owner ! --uid-owner ${users:zope-process} -j REJECT
