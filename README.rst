@@ -183,6 +183,11 @@ Deployment
 #. Remember to rerun the buildout and restart appropriate processes
    every time a change to the buildout config is made.
 
+#. Reload Apache and firewall as necessary. For SLES::
+
+     $ rcapache2 reload
+     $ rcSuSEfirewall2 reload
+
 
 Testing
 -------
