@@ -16,9 +16,9 @@
 #         true
 #     }
 #
-# Then restart the firewall::
+# Then reload the firewall::
 #
-#    rcSuSEfirewall2 restart
+#    rcSuSEfirewall2 reload
 #
 
 
