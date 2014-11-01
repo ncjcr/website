@@ -176,7 +176,7 @@ Deployment
 
    and control it using the provided tool::
 
-     $ ./bin/supervisordctl
+     $ ./bin/supervisorctl
 
    Read more in the `Supervisor documentation <http://supervisord.org/>`_.
 
