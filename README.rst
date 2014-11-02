@@ -146,19 +146,30 @@ Bootstraping
    - libsasl2-dev
    - libjpeg-dev
 
+#. (Deployment) Make sure `mysql_config` binary, necessary for
+   MySQL-python, is available on $PATH. For SLES 11::
+
+     $ zypper install libmysqlclient-devel
+
+#. (Deployment) Install rsync (for collective.recipe.backup).
+
 #. Install Python Imaging Library (PIL) (?)
 
-#. Install rsync (for collective.recipe.backup).
+#. Create new `virtualenv <https://pypi.python.org/pypi/virtualenv>`_
+   and upgrade setuptools::
 
-#. ``$ python2.6 bootstrap.py``
+     $ virtualenv --no-site-packages -p python2.6 venv
+     $ ./venv/bin/pip install setuptools --upgrade
 
-   .. note:: If you are using ``setuptools<0.7`` you will have to create
-             a `virtualenv <https://pypi.python.org/pypi/virtualenv>`_
-             instance, upgrade setuptools and use venv's Python binary::
+   This is due to numerous problems of colliding system packages and
+   what buildout requires, e.g. if setuptoools<0.7 is installed
+   system-wide, bootstrap fill fail. Similarily, on jcrweb, bootratrap
+   2.2.4 fails because of collision with system-wide
+   argparse. `--no-site-packages` will save you from problems, trust
+   me!
 
-                 $ virtualenv --no-site-packages -p python2.6 venv
-                 $ ./venv/bin/pip install setuptools --upgrade
-                 $ ./venv/bin/python bootstrap.py
+#. ``$ ./venv/bin/python2.6 bootstrap.py``
+
 
 Deployment
 ----------
