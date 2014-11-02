@@ -21,18 +21,31 @@
 #    rcSuSEfirewall2 reload
 #
 
+restrict () {
+    # Note that it does not makes sene for two users user1 and user2,
+    # to have "restrict X Y user1" and "restrict X Y user2" at the
+    # same time.
+    iptables -I OUTPUT 1 -p tcp -d $1 --dport $2 -o lo \
+             -m owner ! --uid-owner $3 -j REJECT
+}
 
 # Apache -> Varnish, Supervisor, HAProxy stats
-iptables -I OUTPUT 1 -p tcp --dport ${ports:varnish} -o lo -m owner ! --uid-owner ${users:httpd} -j REJECT
-iptables -I OUTPUT 1 -p tcp --dport ${ports:supervisor} -o lo -m owner ! --uid-owner ${users:httpd} -j REJECT
-iptables -I OUTPUT 1 -p tcp --dport ${ports:haproxy-stats} -o lo -m owner ! --uid-owner ${users:httpd} -j REJECT
+restrict ${hosts:varnish} ${ports:varnish} ${users:httpd}
+restrict ${hosts:supervisor} ${ports:supervisor} ${users:httpd}
+restrict ${hosts:haproxy} ${ports:haproxy-stats} ${users:httpd}
 
 # Varnish -> HAProxy
-iptables -I OUTPUT 1 -p tcp --dport ${ports:haproxy} -o lo -m owner ! --uid-owner ${users:varnish} -j REJECT
+restrict ${hosts:haproxy} ${ports:haproxy} ${users:varnish}
 
 # HAProxy -> Zope instances
-iptables -I OUTPUT 1 -p tcp --dport ${ports:instance1} -o lo -m owner ! --uid-owner ${users:haproxy} -j REJECT
-iptables -I OUTPUT 1 -p tcp --dport ${ports:instance2} -o lo -m owner ! --uid-owner ${users:haproxy} -j REJECT
+restrict ${hosts:instance1} ${ports:instance1} ${users:haproxy}
+restrict ${hosts:instance2} ${ports:instance2} ${users:haproxy}
 
 # Zope instances -> Memcached
-iptables -I OUTPUT 1 -p tcp --dport ${ports:memcached} -o lo -m owner ! --uid-owner ${users:zope-process} -j REJECT
+restrict ${hosts:memcached} ${ports:memcached} ${users:zope-process}
+
+# root -> *. Note, that this rule also applies to supervisord that
+# runs as root and its eventlisteners (*_httpok) that need to connect
+# both to supervisord RPC and Varnish/HAProxy/Zope. It also allows to
+# run `supervisorctl` without having su to "${users:httpd}".
+iptables -I OUTPUT 1 -p tcp -o lo -m owner --uid-owner root -j ACCEPT
