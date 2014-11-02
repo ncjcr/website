@@ -8,9 +8,6 @@
 # To change this to support multiple backends, see the vcl man pages
 # for instructions.
 
-# https://github.com/lkarsten/libvmod-ipcast
-import ipcast;
-
 # Configure balancer server as back end
 backend balancer {
     .host = "${hosts:varnish-backend}";
@@ -23,7 +20,7 @@ acl purge {
 }
 
 acl ping {
-    "localhost";
+    "127.0.0.1";
 }
 
 sub vcl_recv {
@@ -37,12 +34,6 @@ sub vcl_recv {
     } else {
         set req.http.xff = regsub(req.http.X-Forwarded-For,
                 "^[^,]+.?.?(.*)$", "\1");
-    }
-
-    if (ipcast.clientip(req.http.xff) != 0) {
-        # Uncomment the following line to block all non-proxy clients.
-        # Otherwise client.ip is untouched.
-        #error 400 "Bad request";
     }
 
     # Add ping url to test Varnish status.
